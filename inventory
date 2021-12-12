@@ -1,0 +1,3 @@
+[servers]
+185.213.164.182:9494 ansible_user=root
+185.255.91.212 ansible_user=root

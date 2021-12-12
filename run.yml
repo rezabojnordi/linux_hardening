@@ -1,0 +1,6 @@
+---
+- hosts: servers
+  tasks:
+    - name: deploy backup service
+      import_role:
+        name: linux_security
