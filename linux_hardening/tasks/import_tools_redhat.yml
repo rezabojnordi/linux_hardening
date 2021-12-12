@@ -1,0 +1,17 @@
+  
+---
+  - name: "add new repository in Redhat"
+    shell: "yum -y install epel-release"
+  - name: "add to list"
+    shell: "yum repolist"
+  - name: "Installing package in Redhat"
+    yum:
+      name: "{{ item }}"
+      state: present
+      update_cache: true
+    loop:
+        - sysstat
+        - htop
+        - vim
+        - iftop
+        - nload

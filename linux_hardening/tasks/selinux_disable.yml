@@ -1,0 +1,10 @@
+---
+- name: Disabling SELinux state
+  selinux:
+    state: disabled
+  
+- name: running command setinforce
+  shell: "setenforce 0" 
+  
+
+    

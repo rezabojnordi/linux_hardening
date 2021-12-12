@@ -1,0 +1,67 @@
+---
+security_ssh_port: 9494
+security_ssh_password_authentication: "no"
+security_ssh_permit_root_login: "yes"
+security_ssh_usedns: "no"
+security_ssh_permit_empty_password: "no"
+security_ssh_challenge_response_auth: "no"
+security_ssh_gss_api_authentication: "no"
+security_ssh_x11_forwarding: "no"
+security_sshd_state: started
+security_ssh_restart_handler_state: restarted
+security_sudoers_passwordless: []
+security_sudoers_passworded: []
+security_autoupdate_enabled: true
+security_autoupdate_blacklist: []
+# Autoupdate mail settings used on Debian/Ubuntu only.
+security_autoupdate_reboot: "false"
+security_autoupdate_reboot_time: "03:00"
+security_autoupdate_mail_to: ""
+security_autoupdate_mail_on_error: true
+security_ssh_config_path: "/etc/ssh/sshd_config"
+security_ssh_name: ssh
+security_sshd_name: sshd
+
+#------------------------------tuning kernel----------------------------------------------
+security_sysctl_config_path: /etc/sysctl.conf
+security_sysctl_restart_handler_state: sysctl -p
+tcp_keepalive_time: "net.ipv4.tcp_keepalive_time = 1200"
+route_gc_timeout: "net.ipv4.route.gc_timeout = 100"
+ip_local_port_range: "net.ipv4.ip_local_port_range = 1024 65000"
+tcp_syn_retries: "net.ipv4.tcp_syn_retries = 1"
+tcp_synack_retries: "net.ipv4.tcp_synack_retries = 1"
+tcp_max_syn_backlog: "net.ipv4.tcp_max_syn_backlog = 262144"
+netdev_max_backlog: "net.core.netdev_max_backlog = 262144"
+core_somaxconn: "net.core.somaxconn = 262144"
+tcp_syncookies: "net.ipv4.tcp_syncookies=1"
+net_core_rmem_max: "net.core.rmem_max=134217728"
+net_core_wmem_max: "net.core.wmem_max=134217728"
+net_ipv4_tcp_rmem: "net.ipv4.tcp_rmem=4096 87380 134217728"
+net_ipv4_tcp_wmem: "net.ipv4.tcp_wmem=4096 65536 134217728"
+net_core_netdev_max_backlog: "net.core.netdev_max_backlog=300000"
+net_ipv4_tcp_moderate_rcvbuf: "net.ipv4.tcp_moderate_rcvbuf=1"
+net_ipv4_tcp_no_metrics_save: "net.ipv4.tcp_no_metrics_save=1"
+net_ipv4_tcp_congestion_control: "net.ipv4.tcp_congestion_control=htcp"
+net_ipv4_tcp_mtu_probing: "net.ipv4.tcp_mtu_probing=1"
+fs_file_max: "fs.file-max=65535"
+# Increase the tcp-time-wait buckets pool size to prevent simple DOS attacks
+tcp_max_tw_buckets: "net.ipv4.tcp_max_tw_buckets=1440000"
+tcp_tw_recycle: "net.ipv4.tcp_tw_recycle=1"
+tcp_tw_reuse: "net.ipv4.tcp_tw_reuse=1"
+udp_wmem_min: "net.ipv4.udp_wmem_min=16384"
+# Increase the maximum total buffer-space allocatable
+# This is measured in units of pages (4096 bytes)
+tcp_mem: "net.ipv4.tcp_mem = 94500000 915000000 927000000"
+udp_mem: "net.ipv4.udp_mem=65536 131072 262144"
+# Increase the maximum amount of option memory buffers
+optmem_max: "net.core.optmem_max=25165824"
+# Decrease the time default value for tcp_fin_timeout connection
+tcp_fin_timeout: "net.ipv4.tcp_fin_timeout = 30"
+
+#--------------------------------------rule-----------------------------------
+ip_range: "add ip"
+prometheus_port: 9090
+grafana_port: 3000
+prometheus_port2: 19090
+http_port: 80
+

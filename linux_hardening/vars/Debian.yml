@@ -1,0 +1,6 @@
+---
+security_ssh_config_path: /etc/ssh/sshd_config
+security_ssh_restart_handler_state: ssh
+
+security_sysctl_config_path: /etc/sysctl.conf
+security_sysctl_restart_handler_state: sysctl -p

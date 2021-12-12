@@ -1,0 +1,15 @@
+---
+- name: Allow SSH in UFW
+  ufw: rule=allow port={{security_ssh_port}} proto=tcp
+
+- name: block prometheus port in the firewall
+  ufw: rule=allow port={{prometheus_port}} proto=tcp
+# - name: 
+#   shell: "ufw allow from {{ ip_range }} proto tcp to any port {{ prometheus_port }}"
+
+- name: block prometheus port in the firewall
+  ufw: rule=allow port={{grafana_port}} proto=tcp
+
+- name: Set firewall default policy
+  ufw: state=enabled policy=reject
+  become: true

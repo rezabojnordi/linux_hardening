@@ -1,0 +1,11 @@
+  
+---
+  - name: "Installing package in Debian"
+    apt:
+      name:
+        - sysstat
+        - htop
+        - vim
+        - iftop
+        - nload
+      state: latest

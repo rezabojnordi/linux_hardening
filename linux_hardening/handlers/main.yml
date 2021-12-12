@@ -1,0 +1,20 @@
+---
+
+- name: restart ssh
+  service:
+    name: "{{ security_ssh_name }}"
+    state: "{{ security_ssh_restart_handler_state }}"
+
+- name: restart sshd
+  service:
+    name: "{{ security_sshd_name }}"
+    state: "{{ security_ssh_restart_handler_state }}"
+  
+
+
+- name: sysctl -p
+  service:
+    name: "{{ security_sysctl_config_path }}"
+    state: "{{ security_sysctl_restart_handler_state }}"
+
+

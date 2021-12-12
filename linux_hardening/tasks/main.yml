@@ -1,0 +1,32 @@
+---
+# # - name: Include OS-specific variables.
+# #   include_vars: "{{ ansible_os_family }}.yml"
+
+# # # Fail2Ban
+# # - include_tasks: fail2ban.yml
+# #   when: security_fail2ban_enabled | bool
+
+# SSH
+- include: ssh.yml
+
+# # firewall
+# - include: firewall_debian.yml
+#   when:
+#     - ansible_os_family == 'Debian'
+
+# - include: import_tools_debian.yml
+#   when:
+#     - ansible_os_family == 'Debian'
+
+# - include: tuning_kernel.yml
+ 
+#----------------------- REDHAT----------------------------------------
+
+- include: import_tools_redhat.yml
+  when:
+    - ansible_os_family == 'RedHat'
+
+- include: selinux_disable.yml
+  when:
+    - ansible_os_family == 'RedHat'
+

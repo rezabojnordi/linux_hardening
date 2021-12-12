@@ -1,0 +1,49 @@
+---
+# - name: Ensure SSH daemon is running.
+#   service:
+#     name: "{{ security_ssh_config_path }}"
+#     state: "{{ security_sshd_name }}"
+
+- name: Update SSH configuration to be more secure.
+  lineinfile:
+    dest: "{{ security_ssh_config_path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    validate: 'sshd -T -f %s'
+    mode: 0644
+  loop:
+    - regexp: "^PasswordAuthentication"
+      line: "PasswordAuthentication {{ security_ssh_password_authentication }}"
+    - regexp: "^PermitRootLogin"
+      line: "PermitRootLogin {{ security_ssh_permit_root_login }}"
+    - regexp: "^.Port"
+      line: "Port {{ security_ssh_port }}"
+  notify: restart ssh
+  when:
+    - ansible_os_family == 'Debian'
+
+
+
+- name: Update SSH configuration to be more secure.
+  lineinfile:
+    dest: "{{ security_ssh_config_path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    validate: 'sshd -T -f %s'
+    mode: 0644
+  loop:
+    - regexp: "^PasswordAuthentication"
+      line: "PasswordAuthentication {{ security_ssh_password_authentication }}"
+    - regexp: "^PermitRootLogin"
+      line: "PermitRootLogin {{ security_ssh_permit_root_login }}"
+    - regexp: "^.Port"
+      line: "Port {{ security_ssh_port }}"
+  notify: restart sshd
+  when:
+    - ansible_os_family == 'RedHat'
+
+
+
+
